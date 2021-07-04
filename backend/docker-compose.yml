@@ -13,13 +13,13 @@ services:
       - ./migrations:/hasura-migrations
       - ./metadata:/hasura-metadata
     ports:
-      - "8080:8080"
+      - "8081:8081"
 
   db:
     container_name: nextjs-hasura-boilerplate-db
     image: postgres:latest
     ports:
-      - "5432:5432"
+      - "5433:5433"
     volumes:
       - db_data:/var/lib/postgresql/data
     env_file: ./.env
