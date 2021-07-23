@@ -18,7 +18,7 @@ const options = {
   database: {
     type: "postgres",
     host: process.env.DATABASE_HOST,
-    port: 5432,
+    port: 5433,
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
@@ -30,7 +30,13 @@ const options = {
     },
   },
   session: {
-    jwt: true,
+    jwt: false,
+maxAge: 30 * 24 * 60 * 60, // 30 days
+
+  // Seconds - Throttle how frequently to write to database to extend a session.
+  // Use it to limit write operations. Set to 0 to always update the database.
+  // Note: This option is ignored if using JSON Web Tokens
+  updateAge: 24 * 60 * 60, // 24 hours
   },
   jwt: {
     encode: async ({ token }: { token: iToken }) => {
